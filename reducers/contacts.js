@@ -27,6 +27,20 @@ export default function contacts(state = initialState, action) {
         hasError: true,
         errorMsg: 'Something went wrong',
       };
+    case 'SET_FAVORITE_CONTACT':
+      const { contactId, isFavorite } = action.data;
+      const contacts = state.data.map(contact => {
+        if (contact.id === contactId) {
+          contact.isFavorite = isFavorite;
+        }
+
+        return contact;
+      });
+
+      return {
+        ...state,
+        data: contacts,
+      };
     default:
       return state;
   }

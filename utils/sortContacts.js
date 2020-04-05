@@ -29,7 +29,7 @@ export default function sortContacts(contacts) {
   let contactSection = [];
   let currChar;
 
-  sorted.map(contact => {
+  sorted.map((contact, idx) => {
     const thisChar = contact.lastName.charAt(0).toUpperCase();
 
     if (thisChar === currChar) {
@@ -40,6 +40,10 @@ export default function sortContacts(contacts) {
       }
       currChar = thisChar;
       contactSection = [contact];
+    }
+
+    if (idx === sorted.length - 1) {
+      sortedByChar.push({ letter: currChar, section: contactSection });
     }
   });
 

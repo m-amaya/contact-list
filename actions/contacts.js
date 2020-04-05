@@ -10,3 +10,11 @@ export const fetchContacts = () => async dispatch => {
     dispatch({ type: 'FETCH_CONTACTS_FAILED' });
   }
 };
+
+export const setFavoriteContact = (contactId, isFavorite) => ({
+  type: 'SET_FAVORITE_CONTACT',
+  data: {
+    contactId,
+    isFavorite,
+  },
+});

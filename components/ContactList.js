@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchContacts } from '../actions/contacts';
-import { getContacts } from '../selectors/contacts';
+import { getContacts, getFavoriteContacts } from '../selectors/contacts';
 import ContactItem from '../components/ContactItem';
 import sortContacts from '../utils/sortContacts';
 
@@ -27,9 +27,12 @@ import sortContacts from '../utils/sortContacts';
 // Erin Larson – (542) 321-3456
 // .....
 
-export default function ContactList() {
+export default function ContactList({ showFavorites }) {
   const dispatch = useDispatch();
-  const contacts = sortContacts(useSelector(getContacts));
+  console.log(useSelector(getFavoriteContacts));
+  const contacts = showFavorites
+    ? sortContacts(useSelector(getFavoriteContacts))
+    : sortContacts(useSelector(getContacts));
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -37,16 +40,23 @@ export default function ContactList() {
 
   return (
     <div style={{ width: 400 }}>
-      {contacts.map(({ letter, section }) => (
-        <div key={letter}>
-          <h2>{letter}</h2>
-          <div>
-            {section.map(contact => (
-              <ContactItem key={contact.id} {...contact} />
-            ))}
+      {contacts.length ? (
+        contacts.map(({ letter, section }) => (
+          <div key={letter}>
+            <h2>{letter}</h2>
+            <div>
+              {section.map(contact => (
+                <ContactItem key={contact.id} {...contact} />
+              ))}
+            </div>
           </div>
+        ))
+      ) : (
+        <div>
+          You have not favorited any contacts yet. Click on a contact to
+          favorite it.
         </div>
-      ))}
+      )}
     </div>
   );
 }
