@@ -2,30 +2,30 @@ const initialState = {
   data: [],
   isFetching: null,
   hasError: false,
-  errorMsg: null
+  errorMsg: null,
 };
 
 export default function contacts(state = initialState, action) {
   switch (action.type) {
-    case "FETCH_CONTACTS_FETCHING":
+    case 'FETCH_CONTACTS_FETCHING':
       return {
         ...state,
         isFetching: true,
         hasError: false,
-        errorMsg: null
+        errorMsg: null,
       };
-    case "FETCH_CONTACTS_COMPLETE":
+    case 'FETCH_CONTACTS_COMPLETE':
       return {
         ...state,
         data: action.data,
-        isFetching: false
+        isFetching: false,
       };
-    case "FETCH_CONTACTS_FAILED":
+    case 'FETCH_CONTACTS_FAILED':
       return {
         ...state,
         isFetching: false,
         hasError: true,
-        errorMsg: "Something went wrong"
+        errorMsg: 'Something went wrong',
       };
     default:
       return state;

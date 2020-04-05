@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchContacts } from "../actions/contacts";
-import { getContacts } from "../selectors/contacts";
-import ContactItem from "../components/ContactItem";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchContacts } from '../actions/contacts';
+import { getContacts } from '../selectors/contacts';
+import ContactItem from '../components/ContactItem';
+import sortContacts from '../utils/sortContacts';
 
 // Render a list of contacts alphabetically by last name, first name.
 //
@@ -28,7 +29,7 @@ import ContactItem from "../components/ContactItem";
 
 export default function ContactList() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = sortContacts(useSelector(getContacts));
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -36,8 +37,15 @@ export default function ContactList() {
 
   return (
     <div style={{ width: 400 }}>
-      {contacts.map((contact, idx) => (
-        <ContactItem key={idx} {...contact} />
+      {contacts.map(({ letter, section }) => (
+        <div key={letter}>
+          <h2>{letter}</h2>
+          <div>
+            {section.map(contact => (
+              <ContactItem key={contact.id} {...contact} />
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );

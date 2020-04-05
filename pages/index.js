@@ -1,7 +1,7 @@
-import React from "react";
-import Head from "next/head";
+import React from 'react';
+import Head from 'next/head';
 
-import ContactList from "../components/ContactList";
+import ContactList from '../components/ContactList';
 
 export default function Home() {
   return (
