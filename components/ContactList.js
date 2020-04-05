@@ -40,23 +40,23 @@ export default function ContactList({ showFavorites }) {
 
   return (
     <div style={{ width: 400 }}>
-      {contacts.length ? (
-        contacts.map(({ letter, section }) => (
-          <div key={letter}>
-            <h2>{letter}</h2>
-            <div>
-              {section.map(contact => (
-                <ContactItem key={contact.id} {...contact} />
-              ))}
+      {contacts.length
+        ? contacts.map(({ letter, section }) => (
+            <div key={letter}>
+              <h2>{letter}</h2>
+              <div>
+                {section.map(contact => (
+                  <ContactItem key={contact.id} {...contact} />
+                ))}
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <div>
-          You have not favorited any contacts yet. Click on a contact to
-          favorite it.
-        </div>
-      )}
+          ))
+        : showFavorites && (
+            <div>
+              You have not favorited any contacts yet. Click on a contact to
+              favorite it.
+            </div>
+          )}
     </div>
   );
 }
