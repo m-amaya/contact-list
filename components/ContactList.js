@@ -29,7 +29,6 @@ import sortContacts from '../utils/sortContacts';
 
 export default function ContactList({ showFavorites }) {
   const dispatch = useDispatch();
-  console.log(useSelector(getFavoriteContacts));
   const contacts = showFavorites
     ? sortContacts(useSelector(getFavoriteContacts))
     : sortContacts(useSelector(getContacts));
