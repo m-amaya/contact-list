@@ -1,15 +1,24 @@
 import React from 'react';
 
-export default function ContactItem({ firstName, lastName, phone }) {
+import Favorite from './Favorite';
+
+export default function ContactItem({
+  firstName,
+  lastName,
+  phone,
+  isFavorite,
+}) {
   return (
     <div
       style={{
         display: 'flex',
         justifyContent: 'space-between',
         borderBottom: '1px solid #eee',
+        cursor: 'pointer',
       }}>
       <p>
-        {firstName} <strong>{lastName}</strong>
+        <Favorite isFavorite={isFavorite} />
+        <strong>{lastName},</strong> {firstName}
       </p>
       <p>{phone}</p>
     </div>
